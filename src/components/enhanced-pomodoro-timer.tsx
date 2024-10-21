@@ -13,61 +13,20 @@ type Session = {
 };
 
 export function EnhancedPomodoroTimerComponent() {
-  const [sessions, setSessions] = useState<Session[]>(() => {
-    const saved = localStorage.getItem("pomodoro-sessions");
-    return saved
-      ? JSON.parse(saved)
-      : [
-          { duration: 25, type: "work" },
-          { duration: 5, type: "break" },
-          { duration: 25, type: "work" },
-          { duration: 5, type: "break" },
-          { duration: 25, type: "work" },
-          { duration: 30, type: "break" },
-        ];
-  });
-  const [currentSessionIndex, setCurrentSessionIndex] = useState(() => {
-    const saved = localStorage.getItem("pomodoro-current-index");
-    return saved ? parseInt(saved, 10) : 0;
-  });
-  const [minutes, setMinutes] = useState(() => {
-    const saved = localStorage.getItem("pomodoro-minutes");
-    return saved ? parseInt(saved, 10) : sessions[0].duration;
-  });
-  const [seconds, setSeconds] = useState(() => {
-    const saved = localStorage.getItem("pomodoro-seconds");
-    return saved ? parseInt(saved, 10) : 0;
-  });
+  const [sessions, setSessions] = useState<Session[]>([
+    { duration: 25, type: "work" },
+    { duration: 5, type: "break" },
+    { duration: 25, type: "work" },
+    { duration: 5, type: "break" },
+    { duration: 25, type: "work" },
+    { duration: 30, type: "break" },
+  ]);
+  const [currentSessionIndex, setCurrentSessionIndex] = useState(0);
+  const [minutes, setMinutes] = useState(sessions[0].duration);
+  const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [customInput, setCustomInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [selectedScene, setSelectedScene] = useState(() => {
-    const saved = localStorage.getItem("pomodoro-scene");
-    return saved || "desert";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("pomodoro-sessions", JSON.stringify(sessions));
-  }, [sessions]);
-
-  useEffect(() => {
-    localStorage.setItem(
-      "pomodoro-current-index",
-      currentSessionIndex.toString()
-    );
-  }, [currentSessionIndex]);
-
-  useEffect(() => {
-    localStorage.setItem("pomodoro-minutes", minutes.toString());
-  }, [minutes]);
-
-  useEffect(() => {
-    localStorage.setItem("pomodoro-seconds", seconds.toString());
-  }, [seconds]);
-
-  useEffect(() => {
-    localStorage.setItem("pomodoro-scene", selectedScene);
-  }, [selectedScene]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -87,6 +46,7 @@ export function EnhancedPomodoroTimerComponent() {
         }
       }, 1000);
     } else if (!isActive && seconds !== 0) {
+      // @ts-expect-error fix me
       clearInterval(interval);
     }
 
@@ -176,7 +136,6 @@ export function EnhancedPomodoroTimerComponent() {
       </div>
     );
   };
-
   return (
     <div className="space-y-4 my-10">
       <Card className="w-full max-w-md mx-auto">
