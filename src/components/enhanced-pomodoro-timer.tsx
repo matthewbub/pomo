@@ -5,21 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Clock, Coffee } from "lucide-react";
 
 type Session = {
   duration: number;
   type: "work" | "break";
 };
-
-const scenes = [
-  { id: "desert", name: "Desert" },
-  { id: "forest", name: "Forest" },
-  { id: "ocean", name: "Ocean" },
-  { id: "mountains", name: "Mountains" },
-  { id: "cityscape", name: "Cityscape" },
-];
 
 export function EnhancedPomodoroTimerComponent() {
   const [sessions, setSessions] = useState<Session[]>(() => {
