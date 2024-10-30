@@ -7,8 +7,8 @@ import { Slider } from "@/components/ui/slider";
 import { Volume2, VolumeX, RotateCcw } from "lucide-react";
 
 export default function PomodoroTimer() {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(5);
+  const [minutes, setMinutes] = useState(25);
+  const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
