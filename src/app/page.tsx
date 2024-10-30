@@ -1,10 +1,9 @@
-"use client";
-import { EnhancedPomodoroTimerComponent } from "@/components/enhanced-pomodoro-timer";
+import PomodoroTimer from "@/components/PomodoroTimer";
 
 export default function Home() {
   return (
-    <div>
-      <EnhancedPomodoroTimerComponent />
+    <div className="flex flex-col items-center justify-center h-screen">
+      <PomodoroTimer />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 ## pomo
 
-I just needed a timer, this was built initially using v0
+a little pomodoro timer that i use
 
 https://pomo.matthewbub.com/
